@@ -7,8 +7,15 @@ mod ray;
 use ray::Ray;
 use vec3::Vec3;
 
-fn create_ppm(width: i32, height: i32){
+fn color(r: &Ray) -> Vec3{
+    let unit_dir = Vec3::unit_vector(&r.direction());
+    let t: f32 = 0.5* (unit_dir.y() +1.0);
+    Vec3::new(1.0,1.0,1.0)*(1.0-t) + t*Vec3::new(0.5,0.7,1.0)
+}
+fn main() {
 
+    let width = 256;
+    let height = 256;
     println!("P3\n{} {}\n255", width, height);
     for j in (0..height).rev(){
         eprintln!("\rScanlines remaining: {}", j);
@@ -25,13 +32,4 @@ fn create_ppm(width: i32, height: i32){
         }
     }
     eprintln!("Done.\n")
-}
-fn main() {
-
-    let width = 256;
-    let height = 256;
-    create_ppm(width, height);
-
-    // let v: () = Vec3::new();
-
 }
