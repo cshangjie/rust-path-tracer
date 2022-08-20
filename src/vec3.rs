@@ -52,6 +52,14 @@ impl ops::Add for Vec3 {
         }
     }
 }
+impl ops::AddAssign for Vec3 {
+    fn add_assign(&mut self, other: Self){
+        *self = Self{
+            e: [self.e[0] + other.e[0], self.e[1] + other.e[1], self.e[2] + other.e[2],]
+        }
+    }
+}
+
 impl ops::Sub for Vec3 {
     type Output = Self;
     fn sub(self, rhs: Vec3) -> Self::Output {
@@ -76,6 +84,14 @@ impl ops::Div<f64> for Vec3 {
         let k: f64 = 1.0/rhs;
         Vec3{
             e: [self.e[0]*k, self.e[1]*k, self.e[2]*k]
+        }
+    }
+}
+impl ops::Neg for Vec3 {
+    type Output = Self;
+    fn neg(self) -> Vec3{
+        Vec3{
+            e: [-self.e[0], -self.e[1], -self.e[2]]
         }
     }
 }

@@ -38,7 +38,9 @@ impl Hittable for Sphere {
 
         rec.set_t(root);
         rec.set_p(r.point_at_parameter(rec.t()));
-        rec.set_normal((rec.p() - self.center) / self.radius);
+        // rec.set_normal((rec.p() - self.center) / self.radius);
+        let outward_normal: Vec3 = (rec.p() - self.center) / self.radius;
+        rec.set_face_normal(r, &outward_normal);
         
         return true;
     }

@@ -5,7 +5,8 @@ use crate::ray::Ray;
 pub struct HitRecord {
     p: Vec3,
     t: f64,
-    normal: Vec3
+    normal: Vec3,
+    front_face: bool
 }
 
 impl HitRecord {
@@ -26,6 +27,14 @@ impl HitRecord {
     }
     pub fn set_normal(&mut self, normal_val: Vec3) {
         self.normal = normal_val;  
+    }
+    pub fn set_face_normal(&mut self, ray: &Ray, outward_normal: &Vec3){
+        self.front_face = Vec3::dot(&ray.direction(), outward_normal) < 0.0;
+        if(self.front_face){
+            self.normal = *outward_normal;
+        } else {
+            self.normal = -(*outward_normal);
+        }
     }
 }
 pub trait Hittable {
