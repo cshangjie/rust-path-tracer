@@ -1,4 +1,5 @@
 use std::ops;
+use rand::Rng;
 
 #[derive(Default, Debug, Clone, Copy, PartialEq)]
 pub struct Vec3{
@@ -8,12 +9,6 @@ pub struct Vec3{
 impl Vec3 {
     pub fn new(e0: f64, e1: f64, e2: f64) -> Vec3{
         Vec3 { e: [e0, e1, e2] }
-    }
-    pub fn unit_vector(v: &Vec3) -> Vec3 {
-        *v / v.length()
-    }
-    pub fn dot(vec1: &Vec3, vec2: &Vec3) -> f64 {
-        vec1.e[0] * vec2.e[0] + vec1.e[1] * vec2.e[1] + vec1.e[2] * vec2.e[2]
     }
     pub const fn x(&self) -> f64{
         return self.e[0];
@@ -41,6 +36,28 @@ impl Vec3 {
     pub fn length_squared(self) -> f64 {
         self.e[0]*self.e[0] + self.e[1]*self.e[1] + self.e[2]*self.e[2]
     }
+    pub fn near_zero(self) -> bool {
+        let s = 1e-8;
+        return (self.e[0].abs() < s) && (self.e[1].abs() < s) && (self.e[2].abs() < s);
+    }
+    pub fn unit_vector(v: &Vec3) -> Vec3 {
+        *v / v.length()
+    }
+    pub fn dot(vec1: &Vec3, vec2: &Vec3) -> f64 {
+        vec1.e[0] * vec2.e[0] + vec1.e[1] * vec2.e[1] + vec1.e[2] * vec2.e[2]
+    }
+
+    pub fn random_in_unit_sphere() -> Vec3 {
+        let mut p = Vec3::default();
+        let mut rng = rand::thread_rng();
+        loop{
+            p = Vec3::new(rng.gen::<f64>(), rng.gen::<f64>(), rng.gen::<f64>())* 2.0 - Vec3::new(1.0, 1.0, 1.0);
+            if p.length_squared() < 1.0 {
+                return p;
+            }
+        }
+    }
+
 }
 
 impl ops::Add for Vec3 {
