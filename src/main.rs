@@ -61,7 +61,9 @@ fn main() {
     // world
     let mut list: Vec<Box<dyn Hittable>> = Vec::new();
     list.push(Box::new(Sphere::new(Vec3::new(0.0, -100.5, -1.0), 100.0)));
-    list.push(Box::new(Sphere::new(Vec3::new(0.0, 0.0, -1.0), 0.5)));
+    //list.push(Box::new(Sphere::new(Vec3::new(0.0, 0.0, -1.0), 0.5)));
+    list.push(Box::new(Sphere::new(Vec3::new(0.75, 0.0, -1.0), 0.5)));
+    list.push(Box::new(Sphere::new(Vec3::new(-0.75, 0.0, -1.0), 0.5)));
     let world = HittableList::new(list);
   
     // render
