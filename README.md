@@ -4,7 +4,6 @@ Using Peter Shirley's [Ray Tracing in One Weekend](https://raytracing.github.io/
 
 ## Current Output/Progress
 ![corrected sphere with with soft shadows](https://github.com/cshangjie/rust-ray-tracer/blob/main/data/gamma%20corrected%20diffuse%20material.png)
-![two gamma corrected spheres with with soft shadows](https://github.com/cshangjie/rust-ray-tracer/blob/main/data/two_spheres.png?raw=true)
 
 ## To-Do
 * Implement different materials
